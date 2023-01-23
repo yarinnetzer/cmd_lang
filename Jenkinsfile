@@ -25,12 +25,10 @@ branch: 'main'
             steps {
                 script {
                     switch(params.CMD_Lang) {
-                        case "ALL": emailext body: 'The user CMD language 
-choice is: JAVA, PYTHON, C (all the above)',
+                        case "ALL": emailext body: 'The user CMD language choice is: JAVA, PYTHON, C (all the above)',
                                     subject: 'User CMD language choice',
                                     to: 'netzer.yarin@gmail.com'; break
-                        default: emailext body: 'The user CMD language 
-choice is: '+ params.CMD_Lang,
+                        default: emailext body: 'The user CMD language choice is: '+ params.CMD_Lang,
                                  subject: 'User CMD language choice',
                                  to: 'netzer.yarin@gmail.com'; break
                     }
