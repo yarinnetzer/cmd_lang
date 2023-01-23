@@ -9,8 +9,7 @@ pipeline {
     stages{
         stage('Clone sources') {
             steps{
-                git url: 'https://github.com/yarinnetzer/cmd_lang.git', 
-branch: 'main'
+                git url: 'https://github.com/yarinnetzer/cmd_lang.git', branch: 'main'
                 sh ''' if [ '''+ params.CMD_Lang +''' = "ALL" ]
                 then
                 cat JAVA PYTHON C
@@ -21,7 +20,7 @@ branch: 'main'
                 '''
             }
         }
-        stage('sending_email') {
+        stage('sending email') {
             steps {
                 script {
                     switch(params.CMD_Lang) {
@@ -32,6 +31,13 @@ branch: 'main'
                                  subject: 'User CMD language choice',
                                  to: 'netzer.yarin@gmail.com'; break
                     }
+                }
+            }
+        }
+        stage('Run docker apache container') {
+            steps{
+                sh "sed "s/%%CHOICE%%/$(params.CMD_Lang)/"  index.html"
+                sh "docker run -dit --name apache-app -p 8088:80 -v "$PWD":/usr/local/apache2/htdocs/ httpd:2.4"
                 }
             }
         }
