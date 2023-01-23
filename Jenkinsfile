@@ -36,8 +36,8 @@ pipeline {
         }
         stage('Run docker apache container') {
             steps{
-                sh "sed "%%CHOICE%%/$(params.CMD_Lang)/"  index.html"
-                sh "docker run -dit --name apache-app -p 8088:80 -v "$PWD":/usr/local/apache2/htdocs/ httpd:2.4"
+                sh "sed "s/%%CHOICE%%/$(params.CMD_Lang)/"  index.html"
+                sh "docker run -dit --name apache-app -p 8088:80 -v "/Users/yarin/workspace/RealTimeCollege/docker_class/finalproject":/usr/local/apache2/htdocs/ httpd:2.4"
                 }
             }
         }
