@@ -43,7 +43,7 @@ pipeline {
                     }
                 }
                 sh "mkdir -p /var/jenkins_home/yarin_project"
-                sh "mv ./index.html ./Dockerfile ./run_apache.sh /var/jenkins_home/yarin_project"
+                sh "mv ./index.html ./Dockerfile ./run_apache.sh ./yarinnetzerlogo.png ./README.md /var/jenkins_home/yarin_project"
                 }
             }
         }
