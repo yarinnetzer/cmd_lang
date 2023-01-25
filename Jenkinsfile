@@ -37,7 +37,7 @@ pipeline {
         stage('update the index file') {
             steps {
                 sh "sed -i s/CHOICE/${params.CMD_Lang}/ ./index.html"
-                sh "mkdir /var/jenkins_home/yarin_project"
+                sh "mkdir -p /var/jenkins_home/yarin_project"
                 sh "mv ./index.html ./Dockerfile ./run_apache.sh /var/jenkins_home/yarin_project"
                 }
             }
