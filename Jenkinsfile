@@ -36,7 +36,12 @@ pipeline {
         }
         stage('update the index file') {
             steps {
-                sh "sed -i s/CHOICE/${params.CMD_Lang}/ ./index.html"
+                script {
+                    switch(params.CMD_Lang) {
+                        case "ALL": sh "sed -i s/CHOICE/JAVA, PYTHON, C (all the above)/ ./index.html"; break
+                        default: sh "sed -i s/CHOICE/${params.CMD_Lang}/ ./index.html"; break
+                    }
+                }
                 sh "mkdir -p /var/jenkins_home/yarin_project"
                 sh "mv ./index.html ./Dockerfile ./run_apache.sh /var/jenkins_home/yarin_project"
                 }
