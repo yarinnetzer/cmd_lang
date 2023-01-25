@@ -8,7 +8,7 @@ pipeline {
     }
     stages{
         stage('Clone sources') {
-            steps{
+            steps {
                 git url: 'https://github.com/yarinnetzer/cmd_lang.git', branch: 'main'
                 sh ''' if [ '''+ params.CMD_Lang +''' = "ALL" ]
                 then
@@ -34,12 +34,12 @@ pipeline {
                 }
             }
         }
-        stage('Run docker apache container') {
-            steps{
-                sh "sed "s/%%CHOICE%%/$(params.CMD_Lang)/"  index.html"
-                sh "docker run -dit --name apache-app -p 8088:80 -v "$PWD":/usr/local/apache2/htdocs/ httpd:2.4"
+        stage('update the index file') {
+            steps {
+                sh "sed -i s/CHOICE/${params.CMD_Lang}/ ./index.html"
+                sh "mkdir /var/jenkins_home/yarin_project"
+                sh "mv ./index.html ./Dockerfile ./run_apache.sh /var/jenkins_home/yarin_project"
                 }
             }
         }
     }
-}
