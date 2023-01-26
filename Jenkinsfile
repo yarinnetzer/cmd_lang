@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     if(params.CMD_Lang == 'ALL'){
-                        sh "sed -i s/CHOICE/JAVA, PYTHON and C/ ./index.html"
+                        sh "sed -i s/CHOICE/JAVA,PYTHON,C/ ./index.html"
                     }
                     else{
                         sh "sed -i s/CHOICE/${params.CMD_Lang}/ ./index.html"
